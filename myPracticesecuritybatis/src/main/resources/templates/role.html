@@ -7,13 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet"  type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+
 </head>
 
 <body>
 
-    <div>
+    <div class="header">
         <div>
-            <h1>Test Web E-commerce</h1>
+            <h1>Role</h1>
         </div>
 
         <div>
@@ -30,17 +32,18 @@
     </div>
 
 
-    <div>
-        <h1>welcome back, Role</h1>
+    <div class="mainPage">
+        <h1>welcome to Role</h1>
     </div>
 
+    <div class="table">
     <table>
         <thead>
             <tr>
-                <th>number</th>
-                <th>name</th>
-                <th>enabled</th>
-                <th>role_name</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Enabled</th>
+                <th>Role Name</th>
             </tr>
         </thead>
         <tbody>
@@ -49,12 +52,14 @@
                 <td th:text="${user.username}">test</td>
                 <td><input type="checkbox" name="enabled" id="" th:value="${user.enabled}" th:checked="${user.enabled}" disabled></td>
                 <td th:each="role : ${user.roles}">
-                        <span th:text="${role.rolename}"></span>
+                        <span th:text="${role.rolename}">ADMIN</span>
                 </td>
             </tr>
         </tbody>
     </table>
+</div>
 
+<div class="table">
 
     <table>
         <thead>
@@ -70,8 +75,9 @@
             </tr>
         </tbody>
     </table>
+</div>
 
-
+    <div class="form">
     <h1>Add Role</h1>
     <form action=""  th:action="@{/addrole}" method="post" th:object="${userRole}">
 
@@ -92,8 +98,10 @@
         <input type="submit" value="submit">
 
       </form>
+    </div>
 
 
+    <div class="form">
       <h1>Delete Role</h1>
     <form action=""  th:action="@{/deleterole}" method="get" th:object="${userRole}">
 

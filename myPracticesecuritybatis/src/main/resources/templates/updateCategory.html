@@ -7,12 +7,14 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet"  type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+
 </head>
 <body>
 
-    <div>
+    <div class="header">
         <div>
-          <h1>Test Web E-commerce</h1>
+          <h1>Admin</h1>
         </div>
   
         <div>
@@ -20,6 +22,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
           <ul>
             <li><a th:href="@{/admin}" href="#">admin</a></li>
             <li><a sec:authorize="isAuthenticated()"  th:href="@{/logout}" href="#">logout</a></li>
+        <li><a href="#" th:href="@{/admin/role}">Role</a></li>
             
           </ul>
         </div>
@@ -28,11 +31,11 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
       </div>
 
 
-      <div>
-        <h1>welcome back, categories</h1>
+      <div class="mainPage">
+        <h1>update category</h1>
       </div>
 
-      <div>
+      <div class="form">
 
         
 

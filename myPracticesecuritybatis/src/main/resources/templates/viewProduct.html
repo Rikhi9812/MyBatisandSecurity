@@ -7,12 +7,14 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet"  type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+
 </head>
 <body>
 
-    <div>
+    <div class="header">
         <div>
-          <h1>Test Web E-commerce</h1>
+          <h1>View Product</h1>
         </div>
   
         <div>
@@ -31,19 +33,22 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
       </div>
 
 
-      <div>
-        <h1>welcome back, products</h1>
+      <div class="mainPage">
+        <h1>view products</h1>
       </div>
 
-      <div>
-        <img src="" th:src="@{${'/productImages/' + product.imgName}}" alt="" th:alt="${product.name}" height="100px" width="100px">
-
-        <h2 th:text="${product.name}"></h2>
-        <p th:text="${product.category.name}"></p>
-        <h5>Weight: <span th:text="${product.weight}"></span></h5>
-        <p th:text="${product.description}"></p>
-        <a href="" th:href="@{/addToCart/{id}(id=${product.id})}">Add to Cart</a>
+      <div class="box">
+        <div class="box1">
         
+        <img src="" th:src="@{${'/productImages/' + product.imgName}}" alt="" th:alt="${product.name}" height="250px" width="250px">
+
+        <h2 th:text="${product.name}">test</h2>
+        <p th:text="${product.category.name}">test</p>
+        <h5>Weight: <span th:text="${product.weight}">133</span></h5>
+        <p th:text="${product.description}">232</p>
+        <a href="" th:href="@{/addToCart/{id}(id=${product.id})}">Add to Cart</a>
+      </div>
+      
       </div>
     
 </body>

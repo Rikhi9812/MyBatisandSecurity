@@ -3,12 +3,18 @@
 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
   <head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+
     <title>Login page</title>
   </head>
   <body>
-    <div>
+    <div class="header">
       <div>
-        <h1>Test Web E-commerce</h1>
+        <h1>Shop</h1>
       </div>
 
       <div>
@@ -28,28 +34,30 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
     </div>
 
-    <div>
-        <div>
+    <div class="sidebyside">
+        <div class="left">
             <h1>categories</h1>
+            <a class="lefta" th:href="@{/shop}" href="#">All Products</a>
             <ul>
-                <a th:href="@{/shop}" href="#">All Products</a>
                 <a href="" th:each="category, isStat : ${categories}" 
                 th:href="@{/shop/category/{id}(id = ${category.id})}">
-                    <li th:text="${category.name}"></li>
+                    <li th:text="${category.name}">test</li>
                 </a>
 
 
             </ul>
         </div>
-        <div th:each="product : ${products}">
+        <div class="right">
+        <div th:each="product : ${products}" class="right1">
             <img src="" th:src="@{${'/productImages/' + product.imgName}}" alt="" th:alt="${product.name}" height="100px" width="100px">
 
-            <h5 th:text="${product.name}"></h5>
-            <h4 th:text="${product.price}"></h4>
-            <p th:text="${product.description}"></p>
+            <h5 th:text="${product.name}">chochol</h5>
+            <h4 th:text="${product.price}">100</h4>
+            <p th:text="${product.description}">test</p>
             <a href="" th:href="@{/shop/viewproduct/{id}(id=${product.id})}">view Product</a>
 
         </div>
+      </div>
     </div>
   </body>
 </html>

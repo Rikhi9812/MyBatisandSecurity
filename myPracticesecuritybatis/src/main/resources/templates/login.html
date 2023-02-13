@@ -6,12 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet"  type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+
 </head>
 <body>
 
-    <div>
+    <div class="header">
         <div>
-          <h1>Test Web E-commerce</h1>
+          <h1>Login</h1>
         </div>
   
         <div>
@@ -20,7 +22,7 @@
                 <li><a th:href="@{/}" href="#">home</a></li>
                 <li><a th:href="@{/shop}" href="#">shop</a></li>
                 
-                <li><a href="#">Sign Up</a></li>
+                <li><a href="#" th:href="@{/login}">Sign Up</a></li>
               </ul>
         </div>
   
@@ -28,16 +30,17 @@
       </div>
 
 
-      <div>
-        <h1>welcome login</h1>
+      <div class="mainPage">
+        <h1>welcome to login</h1>
       </div>
 
+      <div class="form">
       <form th:action="@{/login}" method="post">
         <!-- <input type="email" name="email" id="email"> -->
         <input type="name" name="username" id="username">
         <input type="password" name="password" id="password">
         <p th:if="${param.error}"> Error now </p>
-        <input type="submit" value="submit">
+        <input type="submit" value="submit"><br>
         <a href="" th:href="@{/register}">Register</a>
         <a href="" th:href="@{/forgotPassword}">ForgotPassword</a>
       </form>

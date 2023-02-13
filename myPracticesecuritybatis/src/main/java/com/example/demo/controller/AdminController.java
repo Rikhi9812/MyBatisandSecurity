@@ -35,10 +35,10 @@ public class AdminController {
 	@GetMapping("/admin")
 	public String admin() {
 		return "adminhome";
-	}
-
+	}	
+	
+	
 	// category
-
 	@GetMapping("/admin/categories")
 	public String getAllCategories(Model model) {
 
@@ -62,6 +62,7 @@ public class AdminController {
 
 		return "redirect:/admin/categories/";
 	}
+	
 
 	@GetMapping("/admin/catefories/delete/{id1}")
 	public String deleteCategory(@PathVariable("id1") int id) {
@@ -78,6 +79,7 @@ public class AdminController {
 
 		return "updateCategory";
 	}
+	
 
 	@PostMapping("/admin/categories/update")
 	public String updateCategory(@ModelAttribute("category") Category category, Model model) {

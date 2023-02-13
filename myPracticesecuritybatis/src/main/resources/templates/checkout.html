@@ -7,12 +7,14 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet"  type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+
 </head>
 <body>
 
-    <div>
+    <div class="header">
         <div>
-          <h1>Test Web E-commerce</h1>
+          <h1>Cart</h1>
         </div>
   
         <div>
@@ -31,13 +33,16 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
       </div>
 
 
-      <div>
-        <h1>welcome back, chekout</h1>
+      <div class="mainPage">
+        <h1>Checkout</h1>
+
+
       </div>
 
       
 
 
+      <div class="leftbox">
         <p>Total: <span th:text="${total}"></span></p>
         <a href="" th:href="@{/pay}">Pay</a>
       </div>

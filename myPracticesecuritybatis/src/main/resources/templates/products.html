@@ -7,35 +7,37 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet"  type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+
 </head>
 <body>
 
+  <div class="header">
     <div>
-        <div>
-          <h1>Test Web E-commerce</h1>
-        </div>
-  
-        <div>
-  
-          <ul>
-            <li><a th:href="@{/admin}" href="#">admin</a></li>
-            <li><a sec:authorize="isAuthenticated()"  th:href="@{/logout}" href="#">logout</a></li>
-            
-          </ul>
-        </div>
-  
-  
+      <h1>Admin</h1>
+    </div>
+
+    <div>
+
+      <ul>
+        <li><a th:href="@{/admin}" href="#">admin</a></li>
+        <li><a sec:authorize="isAuthenticated()"  th:href="@{/logout}" href="#">logout</a></li>
+        <li><a href="#" th:href="@{/admin/role}">Role</a></li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+      <div class="mainPage">
+        <h1>welcome to products</h1>
       </div>
 
+      <div class="table">
 
-      <div>
-        <h1>welcome back, products</h1>
-      </div>
-
-      <div>
-
+        <div>
         <a th:href="@{/admin/products/add}" href="#">Add product</a>
-
+      </div>
 
         
         <table>
