@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div>
+        <div>
+            <h1>Test Web E-commerce</h1>
+        </div>
+
+        <div>
+
+            <ul>
+                <li><a th:href="@{/admin}" href="#">admin</a></li>
+                <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">logout</a></li>
+                <li><a href="#" th:href="@{/admin/role}">Role</a></li>
+
+            </ul>
+        </div>
+
+
+    </div>
+
+
+    <div>
+        <h1>welcome back, Role</h1>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>number</th>
+                <th>name</th>
+                <th>enabled</th>
+                <th>role_name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}">1</td>
+                <td th:text="${user.username}">test</td>
+                <td><input type="checkbox" name="enabled" id="" th:value="${user.enabled}" th:checked="${user.enabled}" disabled></td>
+                <td th:each="role : ${user.roles}">
+                        <span th:text="${role.rolename}"></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Role Id</th>
+                <th>Role Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="role  : ${roles}">
+                <td th:text="${role.id}"></td>
+                <td th:text="${role.rolename}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <h1>Add Role</h1>
+    <form action=""  th:action="@{/addrole}" method="post" th:object="${userRole}">
+
+
+        <select name="userid" id="userid" th:field="*{userid}">
+            <option th:each="user : ${users}"
+            th:value="${user.id}"
+            th:text="${user.username}">
+        </option>
+        </select>
+        <select name="userid" id="userid" th:field="*{roleid}">
+            <option th:each="role : ${roles}"
+            th:value="${role.id}"
+            th:text="${role.rolename}">
+        </option>
+        </select>
+        
+        <input type="submit" value="submit">
+
+      </form>
+
+
+      <h1>Delete Role</h1>
+    <form action=""  th:action="@{/deleterole}" method="get" th:object="${userRole}">
+
+
+        <select name="userid" id="userid" th:field="*{userid}">
+            <option th:each="user : ${users}"
+            th:value="${user.id}"
+            th:text="${user.username}">
+        </option>
+        </select>
+        <select name="userid" id="userid" th:field="*{roleid}">
+            <option th:each="role : ${roles}"
+            th:value="${role.id}"
+            th:text="${role.rolename}">
+        </option>
+        </select>
+        
+        <input type="submit" value="submit">
+
+      </form>
+    </div>
+
+</body>
+
+</html>

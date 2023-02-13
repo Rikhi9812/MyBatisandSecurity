@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div>
+        <div>
+          <h1>Test Web E-commerce</h1>
+        </div>
+  
+        <div>
+  
+            <ul>
+                <li><a th:href="@{/}" href="#">home</a></li>
+                <li><a th:href="@{/shop}" href="#">shop</a></li>
+                <li><a th:href="@{/login}" href="#">login</a></li>
+                <li><a th:href="@{/loginout}" href="#">logout</a></li>
+                <li><a th:href="@{/cart}" href="#">cart</a></li>
+                <li><span th:text="${cartCount}">0</span></li>
+              </ul>
+        </div>
+  
+  
+      </div>
+
+
+      <div>
+        <h1>welcome register</h1>
+      </div>
+
+      <div>
+        
+        <form action="" th:action="@{/register}" th:object="${user}" method="post">
+
+          <input type="hidden" name="id" th:field="*{id}">
+            <input type="text" name="username" id="username" th:field="*{username}">
+            <input type="password" name="password" id="password" th:field="*{password}">
+            <input type="checkbox" name="enabled" id="enabled" th:field="*{enabled}">
+
+            <input type="submit" value="submit">
+
+
+        </form>
+
+
+
+
+      </div>
+    
+</body>
+</html>

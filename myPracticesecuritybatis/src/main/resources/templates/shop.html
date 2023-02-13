@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+  <head>
+    <title>Login page</title>
+  </head>
+  <body>
+    <div>
+      <div>
+        <h1>Test Web E-commerce</h1>
+      </div>
+
+      <div>
+
+        <ul>
+            <li><a th:href="@{/}" href="#">home</a></li>
+            <li><a th:href="@{/shop}" href="#">shop</a></li>
+            <li><a sec:authorize="isAnonymous()" th:href="@{/login}" href="#">login</a></li>
+            <li><a sec:authorize="isAuthenticated()" th:href="@{/loginout}" href="#">logout</a></li>
+            <li><a th:href="@{/cart}" href="#">cart</a></li>
+            <li><span th:text="${cartCount}">0</span></li>
+          </ul>
+      </div>
+
+
+
+
+    </div>
+
+    <div>
+        <div>
+            <h1>categories</h1>
+            <ul>
+                <a th:href="@{/shop}" href="#">All Products</a>
+                <a href="" th:each="category, isStat : ${categories}" 
+                th:href="@{/shop/category/{id}(id = ${category.id})}">
+                    <li th:text="${category.name}"></li>
+                </a>
+
+
+            </ul>
+        </div>
+        <div th:each="product : ${products}">
+            <img src="" th:src="@{${'/productImages/' + product.imgName}}" alt="" th:alt="${product.name}" height="100px" width="100px">
+
+            <h5 th:text="${product.name}"></h5>
+            <h4 th:text="${product.price}"></h4>
+            <p th:text="${product.description}"></p>
+            <a href="" th:href="@{/shop/viewproduct/{id}(id=${product.id})}">view Product</a>
+
+        </div>
+    </div>
+  </body>
+</html>

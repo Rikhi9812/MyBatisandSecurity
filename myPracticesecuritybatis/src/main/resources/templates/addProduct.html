@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div>
+        <div>
+          <h1>Test Web E-commerce</h1>
+        </div>
+  
+        <div>
+  
+          <ul>
+            <li><a th:href="@{/admin}" href="#">admin</a></li>
+            <li><a sec:authorize="isAuthenticated()"  th:href="@{/logout}" href="#">logout</a></li>
+            
+          </ul>
+        </div>
+  
+  
+      </div>
+
+
+      <div>
+        <h1>welcome back, categories</h1>
+      </div>
+
+      <div>
+
+        <form th:action="@{/admin/products/add}" method="post" th:object="${productDTO}" enctype="multipart/form-data">
+            <input type="hidden" name="id" th:field="*{id}">
+            <input type="text" required name="name" id="name" th:field="*{name}"><br>
+            <input type="number"  name="price" id="price" th:field="*{price}"><br>
+            <input type="number"  name="weight" id="weight" th:field="*{weight}"><br>
+            <input type="text"  name="description" id="description" th:field="*{description}"><br>
+            <select name="category" id="category" th:field="*{categoryId}" >
+              <option th:each="category : ${categories}"
+                      th:value="${category.id}"
+                      th:text="${category.name}"
+              >
+            </select>
+            <input type="file" class="custom-file-input"  name="productImage" id="productImage" accept="image/jpeg, image/png"><br>
+            <img src="#" id="imagePreview" height="100px" width="100px" th:src="@{${'/productImages/' + productDTO.imgName}}" style="margin-top: 20px" alt="">
+            <input type="hidden" name="imgName" th:value="${productDTO.imgName}">
+
+            <input type="submit" value="submit">
+        </form>
+        
+
+
+        
+      </div>
+
+
+      <script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
+        </script>
+<script>
+    $(document).ready(() => {
+        $('#productImage').change(function(){
+            const file = this.files[0];
+            console.log(file);
+            if(file){
+                let reader = new FileReader();
+                reader.onload = function(event){
+                    console.log(event.target.result);
+                    $('#imagePreview').attr('src', event.target.result);
+                }
+                reader.readAsDataURL(file);
+            }
+        })
+    })
+    
+</script>
+    
+</body>
+</html>

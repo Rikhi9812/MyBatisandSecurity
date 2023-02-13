@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div>
+        <div>
+          <h1>Test Web E-commerce</h1>
+        </div>
+  
+        <div>
+  
+          <ul>
+            <li><a th:href="@{/admin}" href="#">admin</a></li>
+            <li><a sec:authorize="isAuthenticated()"  th:href="@{/logout}" href="#">logout</a></li>
+            
+          </ul>
+        </div>
+  
+  
+      </div>
+
+
+      <div>
+        <h1>welcome back, products</h1>
+      </div>
+
+      <div>
+
+        <a th:href="@{/admin/products/add}" href="#">Add product</a>
+
+
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>SN</th>
+                    <th>Product Name</th>
+                    <th>Category</th>
+                    <th>preview</th>
+                    <th>Delete</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="product, iStat : ${products}">
+                    <td th:text="${iStat.index + 1}"></td>
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.category.name}"></td>
+                    <td><img src="" height="100px" width="100px" th:src="@{${'/productImages/' + product.imgName}}" alt=""></td>
+                    <td><a th:href="@{/admin/product/delete/{id}(id=${product.id})}" href="">Delete</a></td>
+                    <td><a th:href="@{/admin/product/update/{id}(id=${product.id})}" href="">Update</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+        
+      </div>
+    
+</body>
+</html>

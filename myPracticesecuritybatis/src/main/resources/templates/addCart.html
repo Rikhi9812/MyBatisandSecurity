@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div>
+        <div>
+          <h1>Test Web E-commerce</h1>
+        </div>
+  
+        <div>
+  
+            <ul>
+                <li><a th:href="@{/}" href="#">home</a></li>
+                <li><a th:href="@{/shop}" href="#">shop</a></li>
+                <li><a sec:authorize="isAnonymous()" th:href="@{/login}" href="#">login</a></li>
+                <li><a sec:authorize="isAuthenticated()" th:href="@{/loginout}" href="#">logout</a></li>
+                <li><a th:href="@{/cart}" href="#">cart</a></li>
+                <li><span th:text="${cartCount}">0</span></li>
+              </ul>
+        </div>
+  
+  
+      </div>
+
+
+      <div>
+        <h1>welcome back, cart</h1>
+      </div>
+
+      <div>
+
+        <h5>Cart (<span th:text="${cartCount}"></span>)</h5>
+
+        <div th:each="cart, iStat : ${carts}">
+
+          <img src="" alt="" th:src="@{${'/productImages' + cart.imgName}}" height="100px" width="100px">
+          <h2 th:text="${cart.name}"></h2>
+          <p th:text="${cart.weight}"></p>
+          <p>Yen<span th:text="${cart.price}"></span></p>
+          <a href="" th:href="@{/cart/removeItem/{index}(index=${iStat.index})}">Remove Item</a>
+        </div>
+        
+      </div>
+
+
+      <div>
+
+
+        <p>Total: <span th:text="${total}"></span></p>
+        <a href="" th:href="@{/checkout}">Checkout</a>
+      </div>
+    
+</body>
+</html>

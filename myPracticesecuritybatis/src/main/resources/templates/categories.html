@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div>
+        <div>
+          <h1>Test Web E-commerce</h1>
+        </div>
+  
+        <div>
+  
+          <ul>
+            <li><a th:href="@{/admin}" href="#">admin</a></li>
+            <li><a sec:authorize="isAuthenticated()"  th:href="@{/logout}" href="#">logout</a></li>
+            
+          </ul>
+        </div>
+  
+  
+      </div>
+
+
+      <div>
+        <h1>welcome back, categories</h1>
+      </div>
+
+      <div>
+
+        <a th:href="@{/admin/categories/add}" href="">Add categories</a>
+
+
+        <table>
+            <thead>
+                <tr>
+                    <th>SN</th>
+                    <th>Name</th>
+                    <th>Delete</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="categorie, isStat : ${categories}">
+                    <td th:text="${isStat.index + 1}"></td>
+                    <td th:text="${categorie.name}"></td>
+                    <td><a th:href="@{/admin/catefories/delete/{id1}(id1=${categorie.id})}" href="#">Delete</a></td>
+                    <td><a th:href="@{/admin/catefories/update/{id}(id=${categorie.id})}" href="#">Update</a></td>
+                    <td></td>
+
+                </tr>
+            </tbody>
+        </table>
+
+
+        
+      </div>
+    
+</body>
+</html>

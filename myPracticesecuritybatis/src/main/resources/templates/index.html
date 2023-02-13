@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+  <head>
+    <title>Login page</title>
+  </head>
+  <body>
+    <div>
+      <div>
+        <h1>Test Web E-commerce</h1>
+      </div>
+
+      <div sec:authorize="isAuthenticated()">
+        
+        <span sec:authentication="name">Username</span>
+        <span sec:authentication="principal.authorities">Roles</span>
+      </div>
+
+      
+      <div>
+
+        <ul>
+          <li><a th:href="@{/}" href="#">home</a></li>
+          <li><a th:href="@{/shop}" href="#">shop</a></li>
+          <li><a sec:authorize="isAnonymous()" th:href="@{/login}" href="#">login</a></li>
+          <li><a sec:authorize="isAuthenticated()" th:href="@{/loginout}" href="#">logout</a></li>
+          <li><a th:href="@{/cart}" href="#">cart</a></li>
+          <li><span th:text="${cartCount}">0</span></li>
+        </ul>
+      </div>
+
+
+      <div sec:authorize="hasAnyAuthority('ADMIN')">
+        <p>This is a admin</p>
+      </div>
+
+      <div sec:authorize="hasAnyAuthority('USER')">
+        <p>This is a USER</p>
+      </div>
+
+
+
+    </div>
+  </body>
+</html>

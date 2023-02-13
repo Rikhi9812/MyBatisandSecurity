@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.example.demo.repository.ProductMapper">
+
+
+	<resultMap type="com.example.demo.model.Product" id="product">
+
+		<id column="pid" property="id" />
+		<result column="pdesc" property="description" />
+		<result column="pimg" property="imgName" />
+		<result column="pname" property="name" />
+		<result column="pprice" property="price" />
+		<result column="pweight" property="weight" />
+		<association property="category"
+			javaType="com.example.demo.model.Category">
+			<id column="pcategoryid" property="id" />
+			<result column="cname" property="name" />
+		</association>
+
+	</resultMap>
+	
+	<select id="findOneProduct" resultMap="product">
+	    select p.id as pid ,
+		p.description as pdesc,
+		p.img_name as pimg,
+		p.name as pname,
+		p.price as pprice,
+		p.weight as pweight ,
+		c.name as cname,
+		p.category_id as pcategoryid
+		from product as p
+		left join
+		category as c
+		on p.category_id = c.category_id
+        having pid = #{id};
+	</select>
+
+	<select id="findAllproduct" resultMap="product">
+		select p.id as pid ,
+		p.description as pdesc,
+		p.img_name as pimg,
+		p.name as pname,
+		p.price as
+		pprice,
+		p.weight as pweight ,
+		c.name as cname,
+		p.category_id as
+		pcategoryid
+		from product as p
+		left join
+		category as c
+		on p.category_id =
+		c.category_id;
+	</select>
+	
+	<select id="findbycategory" resultMap="product">
+	    select p.id as pid ,
+		p.description as pdesc,
+		p.img_name as pimg,
+		p.name as pname,
+		p.price as pprice,
+		p.weight as pweight ,
+		c.name as cname,
+		p.category_id as pcategoryid
+		from product as p
+		left join
+		category as c
+		on p.category_id = c.category_id
+        having pcategoryid = #{id};
+	</select>
+
+	<insert id="addProduct">
+		insert ecsite.product(description, img_name, name,
+		category_id, price,
+		weight)
+		values(
+		#{description}, 
+		#{imgName}, 
+		#{name},
+		#{categoryId}, 
+		#{price}, 
+		#{weight}
+		);
+	</insert>
+	
+	
+	<delete id="deleteProductById">
+	    delete from ecsite.product where id = #{id};
+	</delete>
+	
+	<update id="updateProduct">
+	    update product 
+	    set 
+	    name = #{name},
+	    description = #{description},
+	    img_name = #{imgName},
+	    price = #{price},
+	    weight = #{weight},
+	    category_id = ${categoryId}
+	    where
+	    id = #{id};
+	</update>
+
+
+
+</mapper>
+
+
+
