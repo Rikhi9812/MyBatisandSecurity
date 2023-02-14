@@ -36,6 +36,7 @@ public class CartController {
 		return "addCart";
 
 	}
+	
 
 	@GetMapping("/cart/removeItem/{index}")
 	public String deleteCart(@PathVariable("index") int index) {

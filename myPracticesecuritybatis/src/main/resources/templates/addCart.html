@@ -1,69 +1,71 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet"  type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
 
 </head>
+
 <body>
 
-    <div class="header">
-        <div>
-          <h1>Cart</h1>
-        </div>
-  
-        <div>
-  
-            <ul>
-                <li><a th:href="@{/}" href="#">home</a></li>
-                <li><a th:href="@{/shop}" href="#">shop</a></li>
-                <li><a sec:authorize="isAnonymous()" th:href="@{/login}" href="#">login</a></li>
-                <li><a sec:authorize="isAuthenticated()" th:href="@{/loginout}" href="#">logout</a></li>
-                <li><a th:href="@{/cart}" href="#">cart</a></li>
-                <li><span th:text="${cartCount}">0</span></li>
-              </ul>
-        </div>
-  
-  
+  <div class="header">
+    <div>
+      <h1>Cart</h1>
+    </div>
+
+    <div>
+
+      <ul>
+        <li><a th:href="@{/}" href="#">home</a></li>
+        <li><a th:href="@{/shop}" href="#">shop</a></li>
+        <li><a sec:authorize="isAnonymous()" th:href="@{/login}" href="#">login</a></li>
+        <li><a sec:authorize="isAuthenticated()" th:href="@{/loginout}" href="#">logout</a></li>
+        <li><a th:href="@{/cart}" href="#">cart</a></li>
+        <li><span th:text="${cartCount}">0</span></li>
+      </ul>
+    </div>
+
+
+  </div>
+
+
+  <div class="mainPage">
+    <h1>Add Cart</h1>
+  </div>
+
+  <div class="sidebyside">
+
+
+
+    <div class="sideleft">
+      <h5>Cart (<span th:text="${cartCount}"></span>)</h5>
+
+      <div th:each="cart, iStat : ${carts}" class="leftbox">
+
+        <img src="" alt="${cart.imgName}" th:src="@{${'/productImages/' + cart.imgName}}" height="150px" width="150px" >
+        <h2 th:text="${cart.name}">name</h2>
+        <p th:text="${cart.weight}">weight</p>
+        <p>Yen<span th:text="${cart.price}">price</span></p>
+        <a href="" th:href="@{/cart/removeItem/{index}(index=${iStat.index})}">Remove Item</a>
       </div>
+    </div>
 
 
-      <div class="mainPage">
-        <h1>Add Cart</h1>
-      </div>
 
-      <div class="sidebyside">
 
-        
+    <div class="rightbox">
 
-        <div class="sideleft">
-        <h5>Cart (<span th:text="${cartCount}"></span>)</h5>
 
-        <div th:each="cart, iStat : ${carts}" class="leftbox">
+      <p>Total: <span th:text="${total}"></span></p>
+      <a href="" th:href="@{/checkout}">Checkout</a>
+    </div>
+  </div>
 
-          <img src="" alt="" th:src="@{${'/productImages' + cart.imgName}}" height="150px" width="150px">
-          <h2 th:text="${cart.name}">name</h2>
-          <p th:text="${cart.weight}">weight</p>
-          <p>Yen<span th:text="${cart.price}">price</span></p>
-          <a href="" th:href="@{/cart/removeItem/{index}(index=${iStat.index})}">Remove Item</a>
-        </div>
-      </div>
-        
-        
-        
-        
-        <div class="rightbox">
-          
-          
-          <p>Total: <span th:text="${total}"></span></p>
-          <a href="" th:href="@{/checkout}">Checkout</a>
-        </div>
-      </div>
-    
 </body>
+
 </html>
