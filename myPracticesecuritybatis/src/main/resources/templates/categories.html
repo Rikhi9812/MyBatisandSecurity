@@ -53,7 +53,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
                 <tr th:each="categorie, isStat : ${categories}">
                     <td th:text="${isStat.index + 1}"></td>
                     <td th:text="${categorie.name}"></td>
-                    <td><a th:href="@{/admin/catefories/delete/{id1}(id1=${categorie.id})}" href="#">Delete</a></td>
+                    <td><a class="delete" th:href="@{/admin/catefories/delete/{id1}(id1=${categorie.id})}" href="#">Delete</a></td>
                     <td><a th:href="@{/admin/catefories/update/{id}(id=${categorie.id})}" href="#">Update</a></td>
 
                 </tr>

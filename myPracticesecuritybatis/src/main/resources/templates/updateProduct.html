@@ -50,7 +50,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
               >
             </select>
             <input type="file" class="custom-file-input"  name="productImage" id="productImage" accept="image/jpeg, image/png"><br>
-            <img src="#" id="imagePreview" height="100px" width="100px" th:src="@{${'/productImages/' + productDTO.imgName}}" style="margin-top: 20px" alt="">
+            <!-- <img src="#" id="imagePreview" height="100px" width="100px" th:src="@{${'/productImages/' + productDTO.imgName}}" style="margin-top: 20px" alt=""> -->
+            <img id="imagePreview" alt="" height="100px" width="100px" th:src="${'data:image/jpeg;base64,'+{productDTO.imgName}}">
+
             <input type="hidden" name="imgName" th:value="${productDTO.imgName}">
 
             <input type="submit" value="submit">

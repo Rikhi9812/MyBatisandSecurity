@@ -40,7 +40,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
       <div class="box">
         <div class="box1">
         
-        <img src="" th:src="@{${'/productImages/' + product.imgName}}" alt="" th:alt="${product.name}" height="250px" width="250px">
+          <td><img alt="" height="250px" width="250px" th:src="${'data:image/jpeg;base64,'+{product.imgName}}"></td>
+
+        <!-- <img src="" th:src="@{${'/productImages/' + product.imgName}}" alt="" th:alt="${product.name}" height="250px" width="250px"> -->
 
         <h2 th:text="${product.name}">test</h2>
         <p th:text="${product.category.name}">test</p>

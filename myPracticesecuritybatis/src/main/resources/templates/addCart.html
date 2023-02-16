@@ -47,11 +47,13 @@
 
       <div th:each="cart, iStat : ${carts}" class="leftbox">
 
-        <img src="" alt="${cart.imgName}" th:src="@{${'/productImages/' + cart.imgName}}" height="150px" width="150px" >
+        <td><img alt="" height="150px" width="150px" th:src="*{'data:image/jpeg;base64,'+{cart.imgName}}"></td>
+
+        <!-- <img src="" alt="${cart.imgName}" th:src="@{${'/productImages/' + cart.imgName}}" height="150px" width="150px" > -->
         <h2 th:text="${cart.name}">name</h2>
         <p th:text="${cart.weight}">weight</p>
-        <p>Yen<span th:text="${cart.price}">price</span></p>
-        <a href="" th:href="@{/cart/removeItem/{index}(index=${iStat.index})}">Remove Item</a>
+        <p>Yen<span th:text="${cart.price}">price</span></p><br>
+        <a class="deleter" href="" th:href="@{/cart/removeItem/{index}(index=${iStat.index})}">Remove Item</a>
       </div>
     </div>
 

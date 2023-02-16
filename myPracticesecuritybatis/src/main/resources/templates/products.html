@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet"  type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="../static/css/style.css" th:href="@{/css/style.css}">
 
 </head>
+
 <body>
 
   <div class="header">
@@ -21,50 +22,53 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
       <ul>
         <li><a th:href="@{/admin}" href="#">admin</a></li>
-        <li><a sec:authorize="isAuthenticated()"  th:href="@{/loginout}" href="#">logout</a></li>
+        <li><a sec:authorize="isAuthenticated()" th:href="@{/loginout}" href="#">logout</a></li>
         <li><a href="#" th:href="@{/admin/role}">Role</a></li>
-        
+
       </ul>
     </div>
   </div>
 
 
-      <div class="mainPage">
-        <h1>welcome to products</h1>
-      </div>
+  <div class="mainPage">
+    <h1>welcome to products</h1>
+  </div>
 
-      <div class="table">
+  <div class="table">
 
-        <div>
-        <a th:href="@{/admin/products/add}" href="#">Add product</a>
-      </div>
+    <div>
+      <a th:href="@{/admin/products/add}" href="#">Add product</a>
+    </div>
 
-        
-        <table>
-            <thead>
-                <tr>
-                    <th>SN</th>
-                    <th>Product Name</th>
-                    <th>Category</th>
-                    <th>preview</th>
-                    <th>Delete</th>
-                    <th>Update</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="product, iStat : ${products}">
-                    <td th:text="${iStat.index + 1}"></td>
-                    <td th:text="${product.name}"></td>
-                    <td th:text="${product.category.name}"></td>
-                    <td><img src="" height="100px" width="100px" th:src="@{${'/productImages/' + product.imgName}}" alt=""></td>
-                    <td><a th:href="@{/admin/product/delete/{id}(id=${product.id})}" href="">Delete</a></td>
-                    <td><a th:href="@{/admin/product/update/{id}(id=${product.id})}" href="">Update</a></td>
-                </tr>
-            </tbody>
-        </table>
 
-        
-      </div>
-    
+    <table>
+      <thead>
+        <tr>
+          <th>SN</th>
+          <th>Product Name</th>
+          <th>Category</th>
+          <th>preview</th>
+          <th>Delete</th>
+          <th>Update</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="product, iStat : ${products}">
+          <td th:text="${iStat.index + 1}"></td>
+          <td th:text="${product.name}"></td>
+          <td th:text="${product.category.name}"></td>
+          <td><img alt="" height="100px" width="100px" th:src="*{'data:image/jpeg;base64,'+{product.imgName}}"></td>
+          
+          <!-- <td><img src="" height="100px" width="100px" th:src="@{${'/productImages/' + product.imgName}}" alt=""></td> -->
+          <td><a class="delete" th:href="@{/admin/product/delete/{id}(id=${product.id})}" href="">Delete</a></td>
+          <td><a th:href="@{/admin/product/update/{id}(id=${product.id})}" href="">Update</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+
 </body>
+
 </html>

@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -112,18 +110,15 @@ public class AdminController {
 			@RequestParam("productImage") MultipartFile file, @RequestParam("imgName") String imgName)
 			throws IOException {
 
-		String imgUUID;
+		//String imgUUID = null;
+		String imgData = null;
 
 		if (!file.isEmpty()) {
-			imgUUID = file.getOriginalFilename();
-			Path filePathName = Paths.get(uploadDir, imgUUID);
-			Files.write(filePathName, file.getBytes());
-		} else {
-			imgUUID = imgName;
-
-		}
+//			imgUUID = file.getOriginalFilename();
+			imgData = Base64.getEncoder().encodeToString(file.getBytes());
+		} 
 		
-		productDTO.setImgName(imgUUID);
+		productDTO.setImgName(imgData);
 
 		productService.addProduct(productDTO);
 
@@ -160,20 +155,24 @@ public class AdminController {
 
 	@PostMapping("/admin/products/update")
 	public String updateProduct(@ModelAttribute("productDTO") ProductDTO productDTO,
-			@RequestParam("productImage") MultipartFile file, @RequestParam("imgName") String imgName) throws IOException {
+			@RequestParam("productImage") MultipartFile file) throws IOException {
+		
+		Product product = productService.findOneProduct(productDTO.getId());
 
-		String imgUUID;
+		//String imgUUID;
+		String imgData = null;
 
 		if (!file.isEmpty()) {
-			imgUUID = file.getOriginalFilename();
-			Path filePathName = Paths.get(uploadDir, imgUUID);
-			Files.write(filePathName, file.getBytes());
+			//imgUUID = file.getOriginalFilename();
+			//Path filePathName = Paths.get(uploadDir, imgUUID);
+			//Files.write(filePathName, file.getBytes());
+			imgData = Base64.getEncoder().encodeToString(file.getBytes());
 		} else {
-			imgUUID = imgName;
-
+			imgData = product.getImgName();
 		}
+				
 		
-		productDTO.setImgName(imgUUID);
+		productDTO.setImgName(imgData);
 
 		productService.updateProduct(productDTO);
 
