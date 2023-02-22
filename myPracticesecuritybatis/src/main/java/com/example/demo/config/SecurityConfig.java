@@ -31,9 +31,9 @@ public class SecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
 		http.httpBasic().and().authorizeRequests()
-				.antMatchers("/", "/home/", "/shop/**", "/forgotPassword", "/register", "/product/**", "/addProduct", "/admin/**").permitAll()
+				.antMatchers("/", "/home/", "/shop/**", "/forgotPassword", "/register", "/product/**", "/addProduct").permitAll()
 
-				.antMatchers().hasAuthority("ADMIN").antMatchers("/cart", "/addCart/**")
+				.antMatchers("/admin/**").hasAuthority("ADMIN").antMatchers("/cart", "/addCart/**")
 				.hasAnyAuthority("ADMIN", "USER").anyRequest().authenticated()
 
 				.and().formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/").failureUrl("/login?error=true").and()
