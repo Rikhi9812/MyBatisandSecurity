@@ -37,26 +37,66 @@
     </div>
 
     <div class="table">
+        <form action="" th:action="@{/addRole}" method="post" th:object="${formUserListDTO}">
+
+            <input type="submit" value="Add Role">
     <table>
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Enabled</th>
-                <th>Role Name</th>
-            </tr>
+                <th>Role ADMIN</th>
+                <th>Role User</th>
+                <th>Role Creater</th>
+                <th>Role Reader</th>
+                <th>Role Writer</th>
+            </tr>   
         </thead>
         <tbody>
-            <tr th:each="user : ${users}">
-                <td th:text="${user.id}">1</td>
-                <td th:text="${user.username}">test</td>
-                <td><input type="checkbox" name="enabled" id="" th:value="${user.enabled}" th:checked="${user.enabled}" disabled></td>
-                <td th:each="role : ${user.roles}">
-                        <span th:text="${role.rolename}">ADMIN</span>
+            <tr th:each="user, stat : ${formUserListDTO.listUser}">
+                <td th:text="${user.getId()}">1</td>
+                <td th:text="${user.getUsername()}">test</td>
+                <td>
+                    <input type="checkbox" 
+                    th:field="*{listUser[__${stat.index}__].enabled}" />
+
+                    <input type="hidden" th:field="*{listUser[__${stat.index}__].id}">
+                     <input type="hidden" th:field="*{listUser[__${stat.index}__].username}">
+                    <!--<input type="hidden" th:field="*{listUser[__${stat.index}__].password}"> -->
                 </td>
+                <td th:each="role, item : ${user.roles}">
+                        <input type="checkbox" 
+                        th:name="|listUser[__${stat.index}__].roles[__${item.index}__].id|"
+                        th:value="${item.index+1}"
+                        th:checked="${role.getId()}"
+                        />
+
+                        <input type="hidden" 
+                        th:name="|listUser[__${stat.index}__].roles[__${item.index}__].rolename|"
+                        th:value="${role.getRolename}"
+                        th:checked="${role.getRolename()}"
+                        />
+                        <!-- <input type="hidden" 
+                        th:checked="${role.id}"
+                        /> -->
+                </td>
+                <!-- <td th:each="role, item : ${user.roles}">
+                        <input type="text" 
+                        th:field="*{listUser[__${stat.index}__].roles[__${item.index}__].rolename}"
+                        />
+
+                        <input type="hidden" 
+                        th:field="*{listUser[__${stat.index}__].roles[__${item.index}__].id}"
+                        />
+                        <input type="hidden" 
+                        th:checked="${role.id}"
+                        /> 
+                </td> -->
             </tr>
         </tbody>
     </table>
+</form>
 </div>
 
 <div class="table">

@@ -36,6 +36,7 @@ public class AdminController {
 	}	
 	
 	
+	
 	// category
 	@GetMapping("/admin/categories")
 	public String getAllCategories(Model model) {

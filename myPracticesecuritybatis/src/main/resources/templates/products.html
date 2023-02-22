@@ -60,7 +60,7 @@
           <td><img alt="" height="100px" width="100px" th:src="*{'data:image/jpeg;base64,'+{product.imgName}}"></td>
           
           <!-- <td><img src="" height="100px" width="100px" th:src="@{${'/productImages/' + product.imgName}}" alt=""></td> -->
-          <td><a class="delete" th:href="@{/admin/product/delete/{id}(id=${product.id})}" href="">Delete</a></td>
+          <td><a class="delete" th:href="@{/admin/product/delete/{id}(id=${product.id})}" href="">削除</a></td>
           <td><a th:href="@{/admin/product/update/{id}(id=${product.id})}" href="">Update</a></td>
         </tr>
       </tbody>

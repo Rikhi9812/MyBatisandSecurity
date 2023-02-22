@@ -1,6 +1,12 @@
 package com.example.demo.model;
 
 public class Role {
+	
+	public Role() {
+		
+	}
+	
+	
 
 	private int id;
 	private String rolename;
@@ -19,6 +25,12 @@ public class Role {
 	}
 
 	public void setRolename(String rolename) {
+		this.rolename = rolename;
+	}
+
+
+	public Role(int id, String rolename) {
+		this.id = id;
 		this.rolename = rolename;
 	}
 

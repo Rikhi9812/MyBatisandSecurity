@@ -19,7 +19,9 @@ public class SecurityConfig {
 
 	@Autowired
 	UserDetailServiceImpl userDetailServiceImpl;
+	
 
+	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -29,17 +31,19 @@ public class SecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
 		http.httpBasic().and().authorizeRequests()
-				.antMatchers("/", "/home/", "/shop/**", "/forgotPassword", "/register").permitAll()
+				.antMatchers("/", "/home/", "/shop/**", "/forgotPassword", "/register", "/product/**", "/addProduct", "/admin/**").permitAll()
 
-				.antMatchers("/admin/**").hasAuthority("ADMIN").antMatchers("/cart", "/addCart/**")
+				.antMatchers().hasAuthority("ADMIN").antMatchers("/cart", "/addCart/**")
 				.hasAnyAuthority("ADMIN", "USER").anyRequest().authenticated()
 
 				.and().formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/").failureUrl("/login?error=true").and()
-				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/loginout"));
+				.logout().deleteCookies("remove").logoutRequestMatcher(new AntPathRequestMatcher("/loginout"))
+				.and().csrf().disable();
 
 		return http.build();
 
 	}
+	
 	
 	
 	@Bean

@@ -384,6 +384,19 @@ body {
   border: 3px solid #56d700;
 }
 
+@media screen and (max-width: 450px) {
+
+  .sidebyside{
+    flex-direction: column;
+  }
+
+  .right{
+    justify-content: center;
+    align-items: center;
+  }
+  
+}
+
 .box{
   display: flex;
   justify-content: center;
